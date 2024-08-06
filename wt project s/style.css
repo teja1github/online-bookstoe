@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #333;
+    width: 150px; /* Set width to make it vertical */
+    height: 100%; /* Take full height of the container */
+    position: fixed; /* Fix the navigation to the side */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: block; /* Change display to block */
+}
+
+nav ul li a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 180px; /* Adjust margin to accommodate the fixed nav */
+}
+
+h1, h2 {
+    text-align: center;
+}
+.cart-link {
+    position: fixed;
+    bottom: 20px; /* Adjust as needed */
+    right: 20px; /* Adjust as needed */
+    font-size: 24px;
+    color: #333; /* Adjust color as needed */
+    text-decoration: none;
+    z-index: 9999; /* Ensure it's above other content */
+}
+

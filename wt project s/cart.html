@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="books.html">Books</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart</a></li> <!-- Add cart link -->
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Shopping Cart</h1>
+        <div id="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <p>Total Fare: $<span id="total-fare"></span></p>
+        <button onclick="checkout()">Pay Now</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Function to show added books in the cart and calculate total fare
+        function showCartItems() {
+            var cartItems = JSON.parse(localStorage.getItem("cartItems"));
+            var totalFare = 0;
+
+            if (cartItems && cartItems.length > 0) {
+                var cartItemsContainer = document.getElementById("cart-items");
+                cartItemsContainer.innerHTML = ""; // Clear previous items
+
+                cartItems.forEach(function(item) {
+                    var itemElement = document.createElement("div");
+                    itemElement.textContent = item.title + " - $" + item.price;
+                    cartItemsContainer.appendChild(itemElement);
+
+                    // Calculate total fare
+                    totalFare += item.price;
+                });
+            } else {
+                document.getElementById("cart-items").textContent = "No items in the cart.";
+            }
+
+            // Display total fare
+            document.getElementById("total-fare").textContent = totalFare.toFixed(2); // Displaying total fare with two decimal places
+        }
+
+        // Call the function to show cart items when the page loads
+        window.onload = showCartItems;
+
+        // Function to proceed to checkout
+        function checkout() {
+            // Add logic to proceed to checkout
+            alert("Redirecting to payment page!");
+            // You can also add logic to clear the cart after successful payment
+            localStorage.removeItem("cartItems");
+            showCartItems(); // Update the displayed cart items
+        }
+    </script>
+</body>
+</html>

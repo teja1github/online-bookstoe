@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-W8KyAaNRJc1tGI5dwQe2GYA08DtsoQuOVNR12RGFbvc3nqgdOh2zu4S/USX5qsFfR8fNYtf+K/qBO23m9nVfYg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS for the cart symbol */
+        .cart-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #007bff; /* Adjust color as needed */
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 9999; /* Ensure it's above other content */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="books.html">Books</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart</a></li> <!-- Add cart link -->
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Books</h1>
+        <ul id="book-list"></ul>
+    </div>
+
+    <div class="cart-icon" onclick="goToCart()">
+        <i class="fas fa-shopping-cart"></i>
+    </div>
+
+    <script>
+        // Array of books with their details
+        var books = [
+            { title: "Book 1", author: "Author 1", price: 10 },
+            { title: "Book 2", author: "Author 2", price: 12 },
+            { title: "Book 3", author: "Author 3", price: 15 },
+            // Add more books as needed
+        ];
+
+        // Function to generate the book list dynamically
+        function generateBookList() {
+            var bookList = document.getElementById("book-list");
+
+            // Clear existing list
+            bookList.innerHTML = "";
+
+            // Loop through each book and create list item with add to cart button
+            books.forEach(function(book) {
+                var listItem = document.createElement("li");
+                var addButton = document.createElement("button");
+                addButton.textContent = "Add to Cart";
+                addButton.addEventListener("click", function() {
+                    // Add the book to the cart
+                    addToCart(book);
+                });
+
+                // Create the book details
+                var bookDetails = document.createElement("div");
+                bookDetails.innerHTML = "<h3>" + book.title + "</h3><p>Author: " + book.author + "</p><p>Price: $" + book.price + "</p>";
+
+                // Append the details and add to cart button to the list item
+                listItem.appendChild(bookDetails);
+                listItem.appendChild(addButton);
+
+                // Append the list item to the book list
+                bookList.appendChild(listItem);
+            });
+        }
+
+        // Function to add a book to the cart
+        function addToCart(book) {
+            var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+            cartItems.push(book);
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            alert("Added " + book.title + " to cart!");
+        }
+
+        // Function to navigate to the cart page
+        function goToCart() {
+            location.href = "cart.html";
+        }
+
+        // Call the function to generate the book list when the page loads
+        window.onload = generateBookList;
+    </script>
+</body>
+</html>
